@@ -27,7 +27,7 @@
   display: block;
 }
 .w-100 {
-  display: block;
+  width: 100%;
 }
 </style>
 
