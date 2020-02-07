@@ -1,7 +1,8 @@
 {
-  "name": "SvelteComponent",
+  "name": "web-components",
   "svelte": "src/index.js",
   "module": "dist/index.mjs",
+  "version": "0.0.1",
   "main": "dist/index.js",
   "scripts": {
     "build": "rollup -c",
