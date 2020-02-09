@@ -1,7 +1,7 @@
 <svelte:options tag="promotion-banner" />
 
 {#if showBanner}
-  <a class="d-block" target="_blank" href={link} transition:fade>
+  <a class="d-block" target="_blank" href={link}>
     {#if showToggle}
       <img 
         class="close-icon" 
@@ -16,9 +16,7 @@
 
 
 <script>
-  import { onMount } from 'svelte';
-  import { fade } from 'svelte/transition';
-  
+  import { onMount } from 'svelte';  
 
   let img_url = ''
   let link = ''
