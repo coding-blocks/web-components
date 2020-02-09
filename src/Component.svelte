@@ -1,14 +1,30 @@
 <svelte:options tag="promotion-banner" />
 
-<a class="d-block" target="_blank" href={link}>
-  <img src={img_url} alt="" class="w-100">
-</a>
+{#if showBanner}
+  <a class="d-block" target="_blank" href={link} transition:fade>
+    {#if showToggle}
+      <img 
+        class="close-icon" 
+        src="https://minio.codingblocks.com/motley/wrong_g.png" 
+        alt="close" 
+        on:click|stopPropagation|preventDefault|capture={toggleBanner}
+      >
+    {/if}
+    <img src={img_url} alt="" class="w-100">
+  </a>
+{/if}
+
 
 <script>
   import { onMount } from 'svelte';
+  import { fade } from 'svelte/transition';
+  
 
   let img_url = ''
   let link = ''
+  let showBanner = true
+
+  export let showToggle = true
 
   onMount(async () => {
     const response = await fetch(`https://hack-api.codingblocks.com/api/v2/dashboard-banners`)
@@ -17,17 +33,34 @@
     
     img_url = attrs['image-url']
     link = attrs.link
-  
   })
+
+  const toggleBanner = () => {
+    showBanner = !showBanner
+  }
 
 </script>
 
 <style>
 .d-block {
   display: block;
+  position: relative;
 }
 .w-100 {
   width: 100%;
+}
+
+.close-icon {
+  position: absolute;
+  right: 10px;
+  cursor: pointer;
+  top: 10px;
+  width: 15px;
+  transition: width 0.1s;
+}
+
+.close-icon:hover {
+  width: 18px;
 }
 </style>
 
