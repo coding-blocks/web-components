@@ -10,7 +10,7 @@
         on:click|stopPropagation|preventDefault|capture={toggleBanner}
       >
     {/if}
-    <img src={img_url} alt="" class="w-100">
+    <img src={img_url} alt="" width="100%">
   </a>
 {/if}
 
@@ -44,10 +44,6 @@
   display: block;
   position: relative;
 }
-.w-100 {
-  width: 100%;
-}
-
 .close-icon {
   position: absolute;
   right: 10px;
