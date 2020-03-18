@@ -1,1 +1,2 @@
-export { default as default } from './Component.svelte';
+export { default as banner } from './banner'
+export { default as demographic_form } from './demographicForm'

@@ -1,7 +1,7 @@
 {
   "name": "@coding-blocks/web-components",
-  "svelte": "src/index.js",
-  "module": "dist/index.mjs",
+  "srcDir": "src/",
+  "outDir": "dist/",
   "version": "0.0.5",
   "main": "dist/index.js",
   "scripts": {
