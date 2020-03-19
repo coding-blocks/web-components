@@ -69,8 +69,7 @@
 
 <script>
   import { onMount } from 'svelte'
-
-  const oneAuthApi = 'http://test.oneauth/api'
+  import oneauth from './oneauth.js'
 
   let selectedCollegeId = null
   let selectedBranchId = null
@@ -86,23 +85,11 @@
     error: null
   }
 
-  const fetchUser = () =>
-    fetch(oneAuthApi + '/users/me?include=demographic', {
-      credentials: 'include'
-    })
-      .then(resp => resp.json())
-  const fetchColleges = () => 
-    fetch(oneAuthApi + '/colleges')
-      .then(resp => resp.json())
-  const fetchBranches = () => 
-    fetch(oneAuthApi + '/branches')
-      .then(resp => resp.json())
-
   onMount(async () => {
-    user = await fetchUser()
+    user = await oneauth.fetchUser()
     if (user.id) {
-      colleges = await fetchColleges()
-      branches = await fetchBranches()
+      colleges = await oneauth.fetchColleges()
+      branches = await oneauth.fetchBranches()
       selectedGraduationYear = user.graduationYear
       selectedCollegeId = user.demographic.collegeId
       selectedBranchId = user.demographic.branchId
@@ -111,19 +98,11 @@
 
   const handleUpdate = async () => {
     try {
-      const result = await fetch(oneAuthApi + `/users/${user.id}`, {
-        method: 'PATCH',
-        credentials: 'include',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          gradYear: selectedGraduationYear,
-          collegeId: selectedCollegeId,
-          branchId: selectedBranchId
-        })
+      const result = await oneauth.updateUser(user.id, {
+        gradYear: selectedGraduationYear,
+        collegeId: selectedCollegeId,
+        branchId: selectedBranchId
       })
-        .then(resp => resp.json())
       result.success = result.success
     } catch (err) {
       result.error = err
