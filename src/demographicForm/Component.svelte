@@ -13,7 +13,7 @@
   <div class="py-4 px-5 t-align-center">
     <select 
       bind:value={selectedCollegeId} 
-      class="input-text br-50 pr-5 my-2">
+      class="input-text br-50 my-2">
       <option disabled selected value>-- College --</option>
       {#each colleges as college}
         <option 
@@ -23,9 +23,16 @@
         </option>
       {/each}
     </select>
+    {#if selectedCollegeId === 1}
+      <input 
+        bind:value={selectedOtherCollege}
+        type="text" 
+        placeholder="Other College Name"
+        class="input-text br-50 my-2" />
+    {/if}
     <select 
       bind:value={selectedGraduationYear} 
-      class="input-text br-50 pr-5 my-2">
+      class="input-text br-50 my-2">
       <option disabled selected value>-- Graduation Year --</option>
       {#each graduationYears as year}
         <option 
@@ -37,7 +44,7 @@
     </select>
     <select 
       bind:value={selectedBranchId} 
-      class="input-text br-50 pr-5 my-2">
+      class="input-text br-50 my-2">
       <option disabled selected value>-- Branch --</option>
       {#each branches as branch}
         <option 
@@ -69,14 +76,14 @@
 {/if}
 
 <script>
-  import { onMount } from 'svelte'
-  import { createEventDispatcher } from 'svelte';
+  import { onMount, createEventDispatcher } from 'svelte'
 
   import oneauth from './oneauth.js'
 
   let selectedCollegeId = null
   let selectedBranchId = null
   let selectedGraduationYear = null
+  let selectedOtherCollege = ''
   let colleges = []
   let branches = []
   let graduationYears = [2025, 2024, 2023, 2022, 2021, 2020, 2019, 2018, 2017, 2016, 2015, 2014,
@@ -97,6 +104,7 @@
       selectedGraduationYear = user.graduationYear
       selectedCollegeId = user.demographic.collegeId
       selectedBranchId = user.demographic.branchId
+      selectedOtherCollege = user.demographic.otherCollege
     }
   })
 
@@ -105,7 +113,8 @@
       const result = await oneauth.updateUser({
         gradYear: selectedGraduationYear,
         collegeId: selectedCollegeId,
-        branchId: selectedBranchId
+        branchId: selectedBranchId,
+        otherCollege: selectedOtherCollege
       })
       dispatch('updated', result)
       result.success = result.success
