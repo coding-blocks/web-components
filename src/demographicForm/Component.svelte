@@ -50,8 +50,9 @@
 
     <div class="d-flex justify-content-center mt-5">
       <button 
+        id="updatedButton"
         class="button-solid button-orange"
-        on:click|preventDefault={handleUpdate}>
+        on:click={handleUpdate}>
         Update Profile
       </button>
     </div>
@@ -69,6 +70,8 @@
 
 <script>
   import { onMount } from 'svelte'
+  import { createEventDispatcher } from 'svelte';
+
   import oneauth from './oneauth.js'
 
   let selectedCollegeId = null
@@ -79,11 +82,12 @@
   let graduationYears = [2025, 2024, 2023, 2022, 2021, 2020, 2019, 2018, 2017, 2016, 2015, 2014,
     2013, 2012, 2011, 2010, 2009, 2008, 2007, 2006, 2005, 2004, 2003, 2002, 2001, 2000]
   let user = {}
-  
   let result = {
     success: null,
     error: null
   }
+
+  const dispatch = createEventDispatcher();
 
   onMount(async () => {
     user = await oneauth.fetchUser()
@@ -98,11 +102,12 @@
 
   const handleUpdate = async () => {
     try {
-      const result = await oneauth.updateUser(user.id, {
+      const result = await oneauth.updateUser({
         gradYear: selectedGraduationYear,
         collegeId: selectedCollegeId,
         branchId: selectedBranchId
       })
+      dispatch('updated', result)
       result.success = result.success
     } catch (err) {
       result.error = err

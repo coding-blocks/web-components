@@ -20,8 +20,8 @@ class OneauthService {
       .then(resp => resp.json())
   }
   
-  updateUser (userId, userParams) {
-    return fetch(this.url + `/users/${userId}`, {
+  updateUser (userParams) {
+    return fetch(this.url + `/users/me/edit`, {
       method: 'PATCH',
       credentials: 'include',
       headers: {
