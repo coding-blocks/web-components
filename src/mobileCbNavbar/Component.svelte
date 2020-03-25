@@ -8,6 +8,7 @@
   export let css = "https://unpkg.com/@coding-blocks/motley/dist/app.min.css"
   export let tab = "classroom"
   export let showhamburger = false
+  export let logo = 'https://codingblocks.com/assets/images/cb/cblogo.png'
 
   const toggleHamburgerNav = () => showhamburger = !showhamburger
 </script>
@@ -17,12 +18,14 @@
 
 <div class="hamburger-nav b-right overflow-y-auto no-scrollbar {!showhamburger && "hamburger-nav--hidden"} ">
 	<div class="d-flex py-3 justify-content-between align-items-center hamburger-nav__top-bar">
-		<img src="\images\hb_logo_monochrome_full_dg.png" alt="HB" class="hamburger-nav__ham-logo ml-4">
-		<img src="\images\wrong_g.png" alt="#" class="mr-4 hamburger-nav__cross pointer" on:click={toggleHamburgerNav}>
+		<img src={logo} alt="HB" class="hamburger-nav__ham-logo ml-4">
+		<img src="https://minio.codingblocks.com/amoeba/wrong-close.png" alt="#" class="mr-4 hamburger-nav__cross pointer" on:click={toggleHamburgerNav}>
 	</div>
 	<div class="divider-h"></div>
 
-	<div class="mt-5 px-4 overflow-y-auto no-scrollbar">
+  <slot></slot>
+
+	<div class="mt-4 px-4 overflow-y-auto no-scrollbar">
 		<div class="d-flex justify-content-between">
 			<div class="card-md extra-bold orange">Courses</div>
 			<a href="#" class="orange"><i class="fas fa-angle-up fa-lg"></i></a>
