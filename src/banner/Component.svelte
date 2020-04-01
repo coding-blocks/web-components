@@ -5,7 +5,7 @@
     {#if showToggle}
       <img 
         class="close-icon" 
-        src="https://minio.codingblocks.com/motley/wrong_g.png" 
+        src={toggle_url} 
         alt="close" 
         on:click|stopPropagation|preventDefault|capture={toggleBanner}
       >
@@ -21,8 +21,10 @@
   let img_url = ''
   let link = ''
   let showBanner = true
+  let toggle_url = ''
 
   export let showToggle = true
+  export let theme = 'light'
 
   onMount(async () => {
     const response = await fetch(`https://hack-api.codingblocks.com/api/v2/dashboard-banners`)
@@ -31,6 +33,8 @@
     
     img_url = attrs['image-url']
     link = attrs.link
+
+    toggle_url = theme === 'light' ? 'https://minio.codingblocks.com/motley/wrong_g_white.min.png' : 'https://minio.codingblocks.com/motley/wrong_g.png'
   })
 
   const toggleBanner = () => {
