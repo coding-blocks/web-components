@@ -1,13 +1,13 @@
 <svelte:options tag="demographic-form" />
 
-{#if user.id && user.demographic.collegeId === 1}
+{#if user.id && user.demographic.collegeId === 1 && !user.demographic.otherCollege}
 <div class="border-card b-red p-0">
   <div class="bg-gradient-pink white p-4">
     <div class="font-md bold">
       Get INR 1000 Credits
     </div>
     <div class="mt-4">
-      Complete your Profile & get INR 1000 credits in your wallet
+      Complete your Profile &amp; get INR 1000 credits in your wallet
     </div>
   </div>
   {#if result.success}

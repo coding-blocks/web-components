@@ -33,5 +33,4 @@ class OneauthService {
   } 
 }
 
-// export default new OneauthService('https://account.codingblocks.com/api')
-export default new OneauthService('http://test.oneauth/api')
+export default new OneauthService('https://account.codingblocks.com/api')
