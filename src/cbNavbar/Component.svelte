@@ -6,7 +6,10 @@
     <div class="d-flex {topStyle} py-3 pr-5">
       <span class="px-3 pointer" on:click={toggleExpanded}>
         Courses
-        <i class="ml-1 fas fa-chevron-{expanded ? 'up' : 'down'}"></i>
+        <img 
+          src="https://minio.cb.lk/public/fa-5.13/svgs/solid/chevron-{expanded ? 'up' : 'down'}.svg" 
+          alt="chevron" 
+          class="d-inline s-10x10"/>
       </span>
       <div class="px-3">
         <a href="https://codingblocks.com/about.html" target="_blank">About Us</a>
@@ -99,6 +102,5 @@
 </style>
 
 <link rel="stylesheet" href={css} />
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.min.css" integrity="sha256-UzFD2WYH2U1dQpKDjjZK72VtPeWP50NoJjd26rnAdUI=" crossorigin="anonymous" />
 <link href="https://fonts.googleapis.com/css?family=Nunito+Sans:400,600,700,800" rel="stylesheet">
 <link href="https://minio.codingblocks.com/hackerblocks-images/Gilroy.ttf" rel="stylesheet">
