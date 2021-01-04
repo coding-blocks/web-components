@@ -1,13 +1,13 @@
 <svelte:options tag="zoom-meeting" />
 
 <svelte:head>
-  <script src="https://source.zoom.us/1.8.3/lib/vendor/react.min.js"></script>
-  <script src="https://source.zoom.us/1.8.3/lib/vendor/react-dom.min.js"></script>
-  <script src="https://source.zoom.us/1.8.3/lib/vendor/redux.min.js"></script>
-  <script src="https://source.zoom.us/1.8.3/lib/vendor/redux-thunk.min.js"></script>
-  <script src="https://source.zoom.us/1.8.3/lib/vendor/jquery.min.js"></script>
-  <script src="https://source.zoom.us/1.8.3/lib/vendor/lodash.min.js"></script>
-  <script src="https://source.zoom.us/zoom-meeting-1.8.3.min.js" bind:this={script}></script>
+  <script src="https://source.zoom.us/1.8.5/lib/vendor/react.min.js"></script>
+  <script src="https://source.zoom.us/1.8.5/lib/vendor/react-dom.min.js"></script>
+  <script src="https://source.zoom.us/1.8.5/lib/vendor/redux.min.js"></script>
+  <script src="https://source.zoom.us/1.8.5/lib/vendor/redux-thunk.min.js"></script>
+  <script src="https://source.zoom.us/1.8.5/lib/vendor/jquery.min.js"></script>
+  <script src="https://source.zoom.us/1.8.5/lib/vendor/lodash.min.js"></script>
+  <script src="https://source.zoom.us/zoom-meeting-1.8.5.min.js" bind:this={script}></script>
 </svelte:head>
 
 <script>
@@ -15,6 +15,7 @@
 
   let script;
   
+  export let leaveUrl = '/';
   export let meetingnumber;
   export let signature;
   export let apikey;
@@ -28,7 +29,7 @@
       ZoomMtg.prepareJssdk();
       function beginJoin() {
         ZoomMtg.init({
-          leaveUrl: 'http://localhost:8000',
+          leaveUrl,
           success: function () {
             ZoomMtg.join({
               meetingNumber: meetingnumber,
