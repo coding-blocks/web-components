@@ -37,7 +37,7 @@
 
   onMount(async () => {
     
-    const response = await fetch(`http://test.hackbackend/api/v2/dashboard-banners`, {
+    const response = await fetch(`https://hack-api.codingblocks.com/api/v2/dashboard-banners`, {
       headers: {
         client: 'hack-admin',
       }
