@@ -5,9 +5,9 @@
   <link href="https://fonts.googleapis.com/css2?family=Mulish:wght@400;600&display=swap" rel="stylesheet">
 </svelte:head>
 
-{#if showLoginPrompt}
-  <div class="blurrer"></div>
-{/if}
+
+<div class="blurrer" on:click={hideLoginPrompt}></div>
+
 <div id="cb-login-signup" class="cb-login-signup-container">
   <div class="d-flex justify-content-between align-items-center mb-5">
     <h2>Login / Signup</h2>
@@ -161,17 +161,14 @@
     width: 100vw;
     height: 100vh;
     background-color: #939393;
-    opacity: 0.3;
+    opacity: 0.5;
   }
 
-  :host(.hide-cb-login-signup-prompt) .cb-login-signup-container{
-    right: -35vw;
-  }
 
   .cb-login-signup-container {
     background: #15171E;
     color: white;
-    width: 35vw;
+    width: 100vw;
     min-height: 100vh;
     position: fixed;
     z-index: 1001;
@@ -182,10 +179,23 @@
     transition: 0.5s;
   }
 
-  /* .hide-cb-login-signup-container {
-    right: -35vw;
-    transition: 0.5s
-  } */
+  :host(.hide-cb-login-signup-prompt) .cb-login-signup-container{
+    right: -100vw;
+  }
+
+  :host(.hide-cb-login-signup-prompt) .blurrer {
+    display: none;
+  }
+
+  @media screen and (min-width: 768px) {
+    .cb-login-signup-container {
+      width: 35vw;
+    }
+
+    :host(.hide-cb-login-signup-prompt) .cb-login-signup-container{
+      right: -35vw;
+    }
+  }
 
   .btn {
     padding: 10px 10px;
