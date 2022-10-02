@@ -24,7 +24,6 @@
 
 	onMount(async () => {
 		script.addEventListener('load', () => {
-      console.log(meetingnumber)
       ZoomMtg.preLoadWasm();
       ZoomMtg.prepareJssdk();
       function beginJoin() {

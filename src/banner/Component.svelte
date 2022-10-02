@@ -55,7 +55,6 @@
 
     showBanner = !!banners.length
 
-    console.log(showBanner)
     if(!interval) {
       startCarousel('hello')
     }
@@ -63,7 +62,6 @@
 
   const startCarousel = (str) => {
     if(!!interval) {
-      console.log(interval)
       clearInterval(interval);
     }
     interval = setInterval(() => {
