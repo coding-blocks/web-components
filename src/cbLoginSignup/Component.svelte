@@ -95,8 +95,8 @@
   let otpId = null;
   let errorMessage = null
   let showLoginPrompt = localStorage.getItem('cb_login_prompt') === 'true' ? true : false
-  let googleLoginUrl = `https://account.codingblocks.com/login/google/v2?redirect_uri=${appSubdomain}.codingblocks.com&client=${appSubdomain}-codingblocks&client_id=${clientIdMap[appSubdomain]}`
-  let facebookLoginUrl = `https://account.codingblocks.com/login/facebook/v2?redirect_uri=${appSubdomain}.codingblocks.com&client=${appSubdomain}-codingblocks&client_id=${clientIdMap[appSubdomain]}`
+  let googleLoginUrl = `https://account.codingblocks.com/login/google/v2?redirect_uri=https://${appSubdomain}.codingblocks.com&client=${appSubdomain}-codingblocks&client_id=${clientIdMap[appSubdomain]}`
+  let facebookLoginUrl = `https://account.codingblocks.com/login/facebook/v2?redirect_uri=https://${appSubdomain}.codingblocks.com&client=${appSubdomain}-codingblocks&client_id=${clientIdMap[appSubdomain]}`
 
   async function sendOtp() {
     const response = await fetch(apiMap.sendOtp[appSubdomain] || 'http://localhost:3000/api/v2/jwt/otp', {
