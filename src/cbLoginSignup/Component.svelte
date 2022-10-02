@@ -11,7 +11,9 @@
 <div id="cb-login-signup" class="cb-login-signup-container">
   <div class="d-flex justify-content-between align-items-center mb-5">
     <h2>Login / Signup</h2>
-    <button style="color: #3B4254;" on:click={hideLoginPrompt}>X</button>
+    <button style="color: #3B4254;" on:click={hideLoginPrompt}>
+      <img src="https://minio.codingblocks.com/public/cross-black.png" alt="">
+    </button>
   </div>
 
   <div class="mb-4">Sign In with Email</div>
@@ -45,7 +47,7 @@
     </button>
   </a>
 
-  <div class="mb-5">
+  <div class="mb-5 pt-5">
     <div class="header">Find your dream job</div>
     <div class="sub-header mb-4">Trsuted by 100k+ students</div>
     <img src="https://minio.codingblocks.com/public/company-logo-group.png" alt="">
