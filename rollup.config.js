@@ -11,7 +11,7 @@ export default fs
 		input: pkg.srcDir + mod,
 		output: {
 			file: pkg.outDir + mod + (mod.indexOf('.js') === -1 ? '.js' : ''),
-			format: 'iife',
+			format: 'umd',
 			name: `${mod}`
 		},
 		plugins: [
