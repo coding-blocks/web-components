@@ -49,7 +49,7 @@
 
   <div class="mb-5 pt-5">
     <div class="header">Find your dream job</div>
-    <div class="sub-header mb-4">Trsuted by 100k+ students</div>
+    <div class="sub-header mb-4">Trusted by 100k+ students</div>
     <img src="https://minio.codingblocks.com/public/company-logo-group.png" alt="">
   </div>
 
