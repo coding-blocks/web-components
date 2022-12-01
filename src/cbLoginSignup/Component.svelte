@@ -16,17 +16,31 @@
     </button>
   </div>
 
-  <div class="mb-4">Sign In with Email</div>
+  <div class="mb-4">Sign In with 
+    <button class="{loginFlow === 'email' ? 'red' : ''}" on:click={changeLoginFlow('email')}>Email</button>
+    Or
+    <button class="{loginFlow === 'mobile' ? 'red' : ''}" on:click={changeLoginFlow('mobile')}>Mobile</button> 
+  </div>
   
   {#if errorMessage}
     <div class="red">{errorMessage}</div>
   {/if}
-  {#if otpId} 
-    <input type="number" placeholder="Enter OTP" class="w-100 mb-4" bind:value={otp}/>
-    <button class="btn btn-primary w-100" disabled={!!!otp} on:click={verifyOtp}>Verify OTP</button>
+  {#if loginFlow === 'email'}
+    {#if otpId} 
+      <input type="number" placeholder="Enter OTP" class="w-100 mb-4" bind:value={otp}/>
+      <button class="btn btn-primary w-100" disabled={!!!otp} on:click={verifyOtp}>Verify OTP</button>
+    {:else}
+      <input type="email" placeholder="Enter Email" class="w-100 mb-4" bind:value={email}/>
+      <button class="btn btn-primary w-100" disabled={!!!email} on:click={sendOtp}>Send OTP</button>
+    {/if}
   {:else}
-    <input type="email" placeholder="Enter Email" class="w-100 mb-4" bind:value={email}/>
-    <button class="btn btn-primary w-100" disabled={!!!email} on:click={sendOtp}>Sign In</button>
+    {#if otpId} 
+      <input type="number" placeholder="Enter OTP" class="w-100 mb-4" bind:value={otp}/>
+      <button class="btn btn-primary w-100" disabled={!!!otp} on:click={verifyOtp}>Verify OTP</button>
+    {:else}
+      <input type="number" placeholder="Enter 10 digit Mobile Number" class="w-100 mb-4" bind:value={mobile}/>
+      <button class="btn btn-primary w-100" disabled={!!!mobile} on:click={sendOtp}>Send OTP</button>
+    {/if}
   {/if}
 
   <div class="d-flex justify-content-center align-items-center" style="margin: 30px 0px;">
@@ -78,46 +92,68 @@
     'code-gym': 9706874989
   }
   const apiMap = {
-    sendOtp: {
+    sendOtpEmail: {
       'hack': 'https://hack-api.codingblocks.com/api/v2/jwt/otp',
       'online': 'https://online-api.codingblocks.com/api/v2/jwt/otp/email',
       'hire': 'https://hire-api.codingblocks.com/login/otp/email',
-      'code-gym': 'https://code-gym-api.codingblocks.com/api/jwt/otp'
+      'code-gym': 'https://code-gym-api.codingblocks.com/api/jwt/otp/email'
     },
-    verifyOtp: {
+    sendOtpMobile: {
+      'hack': 'https://hack-api.codingblocks.com/api/v2/jwt/otp',
+      'online': 'https://online-api.codingblocks.com/api/v2/jwt/otp/mobile',
+      'hire': 'https://hire-api.codingblocks.com/login/otp/mobile',
+      'code-gym': 'https://code-gym-api.codingblocks.com/api/jwt/otp/mobile'
+    },
+    verifyOtpEmail: {
       'hack': 'https://hack-api.codingblocks.com/api/v2/jwt/otp/verify',
       'online': 'https://online-api.codingblocks.com/api/v2/jwt/otp/email/verify',
       'hire': 'https://hire-api.codingblocks.com/login/otp/email/verify',
-      'code-gym': 'https://code-gym-api.codingblocks.com/api/jwt/verify'
+      'code-gym': 'https://code-gym-api.codingblocks.com/api/jwt/otp/verify'
+    },
+    verifyOtpMobile: {
+      'hack': 'https://hack-api.codingblocks.com/api/v2/jwt/otp/verify',
+      'online': 'https://online-api.codingblocks.com/api/v2/jwt/otp/mobile/verify',
+      'hire': 'https://hire-api.codingblocks.com/login/otp/mobile/verify',
+      'code-gym': 'https://code-gym-api.codingblocks.com/api/jwt/otp/verify'
     }
   }
 
   let email = null;
+  let mobile = null;
   let otp = null
   let otpId = null;
   let errorMessage = null
+  let loginFlow = 'email'
   let showLoginPrompt = localStorage.getItem('cb_login_prompt') === 'true' ? true : false
   let googleLoginUrl = `https://account.codingblocks.com/login/google/v2?redirect_uri=https://${appSubdomain}.codingblocks.com&client=${appSubdomain}-codingblocks&client_id=${clientIdMap[appSubdomain]}`
   let facebookLoginUrl = `https://account.codingblocks.com/login/facebook/v2?redirect_uri=https://${appSubdomain}.codingblocks.com&client=${appSubdomain}-codingblocks&client_id=${clientIdMap[appSubdomain]}`
 
   async function sendOtp() {
-    const response = await fetch(apiMap.sendOtp[appSubdomain] || 'http://localhost:3000/api/v2/jwt/otp', {
+    const response = await fetch(loginFlow === 'email' ? apiMap.sendOtpEmail[appSubdomain] : apiMap.sendOtpMobile[appSubdomain] || 'http://localhost:3000/api/v2/jwt/otp', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        email
+        email,
+        mobile
       })
     })
-    let { id } = await response.json()
-    otpId = id
+    if(response.ok) {
+      let { id } = await response.json()
+      otpId = id
+    } else {
+      const { message } = await response.json()
+      if(message) {
+        errorMessage = message
+      }
+    }
   }
 
   async function verifyOtp() {
     errorMessage = null
 
-    const response = await fetch(apiMap.verifyOtp[appSubdomain] || 'http://localhost:3000/api/v2/jwt/otp/verify', {
+    const response = await fetch( loginFlow === 'email' ? apiMap.verifyOtpEmail[appSubdomain] : apiMap.verifyOtpMobile[appSubdomain] || 'http://localhost:3000/api/v2/jwt/otp/verify', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -125,6 +161,7 @@
       credentials: 'include',
       body: JSON.stringify({
         email,
+        mobile,
         otp_id: otpId,
         otp
       })
@@ -138,6 +175,11 @@
         errorMessage = message
       }
     }
+  }
+
+  const changeLoginFlow = (flowType) => () => {
+    loginFlow = flowType
+    otpId = null
   }
 
   function hideLoginPrompt() {
