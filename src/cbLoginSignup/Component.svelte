@@ -125,8 +125,8 @@
   let errorMessage = null
   let loginFlow = 'email'
   let showLoginPrompt = localStorage.getItem('cb_login_prompt') === 'true' ? true : false
-  let googleLoginUrl = `https://account.codingblocks.com/login/google/v2?redirect_uri=https://${appSubdomain}.codingblocks.com&client=${appSubdomain}-codingblocks&client_id=${clientIdMap[appSubdomain]}`
-  let facebookLoginUrl = `https://account.codingblocks.com/login/facebook/v2?redirect_uri=https://${appSubdomain}.codingblocks.com&client=${appSubdomain}-codingblocks&client_id=${clientIdMap[appSubdomain]}`
+  let googleLoginUrl = appSubdomain.includes('localhost') ? `http://localhost:3838/login/google/v2?redirect_uri=http://${appSubdomain}&client=localhost&client_id=1234567890` : `https://account.codingblocks.com/login/google/v2?redirect_uri=https://${appSubdomain}.codingblocks.com&client=${appSubdomain}-codingblocks&client_id=${clientIdMap[appSubdomain]}`
+  let facebookLoginUrl = appSubdomain.includes('localhost') ? `http://localhost:3838/login/facebook/v2?redirect_uri=http://${appSubdomain}&client=localhost&client_id=1234567890` : `https://account.codingblocks.com/login/facebook/v2?redirect_uri=https://${appSubdomain}.codingblocks.com&client=${appSubdomain}-codingblocks&client_id=${clientIdMap[appSubdomain]}`
 
   async function sendOtp() {
     const response = await fetch(loginFlow === 'email' ? apiMap.sendOtpEmail[appSubdomain] : apiMap.sendOtpMobile[appSubdomain] || 'http://localhost:3000/api/jwt/otp', {
