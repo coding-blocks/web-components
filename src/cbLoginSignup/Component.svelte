@@ -96,13 +96,13 @@
       'hack': 'https://hack-api.codingblocks.com/api/v2/jwt/otp',
       'online': 'https://online-api.codingblocks.com/api/v2/jwt/otp/email',
       'hire': 'https://hire-api.codingblocks.com/login/otp/email',
-      'code-gym': 'https://code-gym-api.codingblocks.com/api/jwt/otp/email'
+      'code-gym': 'https://code-gym-api.codingblocks.com/api/jwt/otp'
     },
     sendOtpMobile: {
       'hack': 'https://hack-api.codingblocks.com/api/v2/jwt/otp',
       'online': 'https://online-api.codingblocks.com/api/v2/jwt/otp/mobile',
       'hire': 'https://hire-api.codingblocks.com/login/otp/mobile',
-      'code-gym': 'https://code-gym-api.codingblocks.com/api/jwt/otp/mobile'
+      'code-gym': 'https://code-gym-api.codingblocks.com/api/jwt/otp'
     },
     verifyOtpEmail: {
       'hack': 'https://hack-api.codingblocks.com/api/v2/jwt/otp/verify',
@@ -129,7 +129,7 @@
   let facebookLoginUrl = `https://account.codingblocks.com/login/facebook/v2?redirect_uri=https://${appSubdomain}.codingblocks.com&client=${appSubdomain}-codingblocks&client_id=${clientIdMap[appSubdomain]}`
 
   async function sendOtp() {
-    const response = await fetch(loginFlow === 'email' ? apiMap.sendOtpEmail[appSubdomain] : apiMap.sendOtpMobile[appSubdomain] || 'http://localhost:3000/api/v2/jwt/otp', {
+    const response = await fetch(loginFlow === 'email' ? apiMap.sendOtpEmail[appSubdomain] : apiMap.sendOtpMobile[appSubdomain] || 'http://localhost:3000/api/jwt/otp', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -153,7 +153,7 @@
   async function verifyOtp() {
     errorMessage = null
 
-    const response = await fetch( loginFlow === 'email' ? apiMap.verifyOtpEmail[appSubdomain] : apiMap.verifyOtpMobile[appSubdomain] || 'http://localhost:3000/api/v2/jwt/otp/verify', {
+    const response = await fetch( loginFlow === 'email' ? apiMap.verifyOtpEmail[appSubdomain] : apiMap.verifyOtpMobile[appSubdomain] || 'http://localhost:3000/api/jwt/otp/verify', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
