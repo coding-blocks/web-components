@@ -24,6 +24,12 @@
     <input type="number" placeholder="Enter 10 digit Mobile Number" class="w-100 mb-4" bind:value={mobile}/>
     <button class="btn btn-primary w-100" disabled={!!!mobile} on:click={sendOtp}>Send OTP</button>
   {/if}
+
+  {#if showLogoutButton}
+    <a href={apiMap.logout[appSubdomain]}>
+      <button class="btn btn-primary w-100 my-3">Logout</button>
+    </a>
+  {/if}
   
 
   <div class="mb-5 pt-5">
@@ -65,6 +71,12 @@
       'online': 'https://online-api.codingblocks.com/api/v2/jwt/otp/mobile/verify',
       'hire': 'https://hire-api.codingblocks.com/login/otp/mobile/verify',
       'code-gym': 'https://code-gym-api.codingblocks.com/api/jwt/otp/verify'
+    },
+    logout: {
+      'hack': '/app/logout',
+      'online': '/app/logout',
+      'hire': '/logout',
+      'code-gym': '/logout'
     }
   }
 
@@ -72,6 +84,7 @@
   let otp = null
   let otpId = null;
   let errorMessage = null
+  let showLogoutButton = false
 
   onMount(() => {
     authCookie = document.cookie.split('; ').filter(_ => _.split('=')[0] === 'cb_auth')[0].split('=')[1]
@@ -94,6 +107,9 @@
       const { message } = await response.json()
       if(message) {
         errorMessage = message
+        if(message.includes('Try logging in with that account.')) {
+          showLogoutButton = true
+        }
       }
     }
   }
