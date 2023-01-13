@@ -109,7 +109,6 @@
       },
       credentials: 'include',
       body: JSON.stringify({
-        email,
         mobile,
         otp_id: otpId,
         otp
