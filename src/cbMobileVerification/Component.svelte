@@ -74,7 +74,7 @@
   let errorMessage = null
 
   onMount(() => {
-    authCookie = document.cookie.split('; ').filter(_ => _.split('=')[0] === 'cb_auth')[0]
+    authCookie = document.cookie.split('; ').filter(_ => _.split('=')[0] === 'cb_auth')[0].split('=')[1]
   })
 
   async function sendOtp() {
