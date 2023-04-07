@@ -90,32 +90,32 @@
     'hack': 2146237097,
     'online': 5633768694,
     'hire': 4190457915,
-    'code-gym': 9706874989
+    'codeskiller': 9706874989
   }
   const apiMap = {
     sendOtpEmail: {
       'hack': 'https://hack-api.codingblocks.com/api/v2/jwt/otp',
       'online': 'https://online-api.codingblocks.com/api/v2/jwt/otp/email',
       'hire': 'https://hire-api.codingblocks.com/login/otp/email',
-      'code-gym': 'https://code-gym-api.codingblocks.com/api/jwt/otp'
+      'codeskiller': 'https://code-gym-api.codingblocks.com/api/jwt/otp'
     },
     sendOtpMobile: {
       'hack': 'https://hack-api.codingblocks.com/api/v2/jwt/otp',
       'online': 'https://online-api.codingblocks.com/api/v2/jwt/otp/mobile',
       'hire': 'https://hire-api.codingblocks.com/login/otp/mobile',
-      'code-gym': 'https://code-gym-api.codingblocks.com/api/jwt/otp'
+      'codeskiller': 'https://code-gym-api.codingblocks.com/api/jwt/otp'
     },
     verifyOtpEmail: {
       'hack': 'https://hack-api.codingblocks.com/api/v2/jwt/otp/verify',
       'online': 'https://online-api.codingblocks.com/api/v2/jwt/otp/email/verify',
       'hire': 'https://hire-api.codingblocks.com/login/otp/email/verify',
-      'code-gym': 'https://code-gym-api.codingblocks.com/api/jwt/otp/verify'
+      'codeskiller': 'https://code-gym-api.codingblocks.com/api/jwt/otp/verify'
     },
     verifyOtpMobile: {
       'hack': 'https://hack-api.codingblocks.com/api/v2/jwt/otp/verify',
       'online': 'https://online-api.codingblocks.com/api/v2/jwt/otp/mobile/verify',
       'hire': 'https://hire-api.codingblocks.com/login/otp/mobile/verify',
-      'code-gym': 'https://code-gym-api.codingblocks.com/api/jwt/otp/verify'
+      'codeskiller': 'https://code-gym-api.codingblocks.com/api/jwt/otp/verify'
     }
   }
 
