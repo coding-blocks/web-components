@@ -2,7 +2,7 @@
   "name": "@coding-blocks/web-components",
   "srcDir": "src/",
   "outDir": "dist/",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "main": "dist/index.js",
   "scripts": {
     "build": "rollup -c",
