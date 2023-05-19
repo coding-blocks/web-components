@@ -101,12 +101,12 @@
       })
     })
     if(response.ok) {
-      let { id } = await response.json()
-      otpId = id
+      let { id, Details } = await response.json()
+      otpId = id || Details
     } else {
-      const { message } = await response.json()
-      if(message) {
-        errorMessage = message
+      const { message, Details } = await response.json()
+      if(message || Details) {
+        errorMessage = message || Details
         if(message.includes('Try logging in with that account.')) {
           showLogoutButton = true
         }
