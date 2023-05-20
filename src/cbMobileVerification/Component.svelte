@@ -134,9 +134,9 @@
     if(response.ok) {
       window.location.reload()
     } else {
-      const { message } = await response.json()
-      if(message) {
-        errorMessage = message
+      const { message, Details } = await response.json()
+      if(message || Details) {
+        errorMessage = message || Details
       }
     }
   }
