@@ -64,7 +64,7 @@
       'hack': 'https://hack-api.codingblocks.com/api/v2/jwt/otp?flow=mobile_verification',
       'online': 'https://online-api.codingblocks.com/api/v2/jwt/otp/mobile?flow=mobile_verification',
       'hire': 'https://hire-api.codingblocks.com/login/otp/mobile?flow=mobile_verification',
-      'code-gym': 'https://code-gym-api.codingblocks.com/api/jwt/ot?flow=mobile_verificationp'
+      'code-gym': 'https://code-gym-api.codingblocks.com/api/jwt/otp?flow=mobile_verificationp'
     },
     verifyOtpMobile: {
       'hack': 'https://hack-api.codingblocks.com/api/v2/jwt/otp/verify',
@@ -94,7 +94,8 @@
     const response = await fetch(apiMap.sendOtpMobile[appSubdomain] || 'http://localhost:3000/api/jwt/otp', {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Authorization': 'JWT ' + authCookie
       },
       body: JSON.stringify({
         mobile
