@@ -61,10 +61,10 @@
   const appSubdomain = window.location.host.split('.')[0]
   const apiMap = {
     sendOtpMobile: {
-      'hack': 'https://hack-api.codingblocks.com/api/v2/jwt/otp',
-      'online': 'https://online-api.codingblocks.com/api/v2/jwt/otp/mobile',
-      'hire': 'https://hire-api.codingblocks.com/login/otp/mobile',
-      'code-gym': 'https://code-gym-api.codingblocks.com/api/jwt/otp'
+      'hack': 'https://hack-api.codingblocks.com/api/v2/jwt/otp?flow=mobile_verification',
+      'online': 'https://online-api.codingblocks.com/api/v2/jwt/otp/mobile?flow=mobile_verification',
+      'hire': 'https://hire-api.codingblocks.com/login/otp/mobile?flow=mobile_verification',
+      'code-gym': 'https://code-gym-api.codingblocks.com/api/jwt/ot?flow=mobile_verificationp'
     },
     verifyOtpMobile: {
       'hack': 'https://hack-api.codingblocks.com/api/v2/jwt/otp/verify',
