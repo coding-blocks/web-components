@@ -67,10 +67,10 @@
       'code-gym': 'https://code-gym-api.codingblocks.com/api/jwt/otp?flow=mobile_verificationp'
     },
     verifyOtpMobile: {
-      'hack': 'https://hack-api.codingblocks.com/api/v2/jwt/otp/verify',
-      'online': 'https://online-api.codingblocks.com/api/v2/jwt/otp/mobile/verify',
-      'hire': 'https://hire-api.codingblocks.com/login/otp/mobile/verify',
-      'code-gym': 'https://code-gym-api.codingblocks.com/api/jwt/otp/verify'
+      'hack': 'https://hack-api.codingblocks.com/api/v2/jwt/otp/verify?flow=mobile_verification',
+      'online': 'https://online-api.codingblocks.com/api/v2/jwt/otp/mobile/verify?flow=mobile_verification',
+      'hire': 'https://hire-api.codingblocks.com/login/otp/mobile/verify?flow=mobile_verification',
+      'code-gym': 'https://code-gym-api.codingblocks.com/api/jwt/otp/verif?flow=mobile_verificationy'
     },
     logout: {
       'hack': '/app/logout',
