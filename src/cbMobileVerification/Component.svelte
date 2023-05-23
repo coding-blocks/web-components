@@ -61,16 +61,16 @@
   const appSubdomain = window.location.host.split('.')[0]
   const apiMap = {
     sendOtpMobile: {
-      'hack': 'https://hack-api.codingblocks.com/api/v2/jwt/otp?flow=mobile_verification',
-      'online': 'https://online-api.codingblocks.com/api/v2/jwt/otp/mobile?flow=mobile_verification',
-      'hire': 'https://hire-api.codingblocks.com/login/otp/mobile?flow=mobile_verification',
-      'code-gym': 'https://code-gym-api.codingblocks.com/api/jwt/otp?flow=mobile_verificationp'
+      'hack': 'https://hack-api.codingblocks.com/api/v2/jwt/otp',
+      'online': 'https://online-api.codingblocks.com/api/v2/jwt/otp/mobile',
+      'hire': 'https://hire-api.codingblocks.com/login/otp/mobile',
+      'code-gym': 'https://code-gym-api.codingblocks.com/api/jwt/otp'
     },
     verifyOtpMobile: {
-      'hack': 'https://hack-api.codingblocks.com/api/v2/jwt/otp/verify?flow=mobile_verification',
-      'online': 'https://online-api.codingblocks.com/api/v2/jwt/otp/mobile/verify?flow=mobile_verification',
-      'hire': 'https://hire-api.codingblocks.com/login/otp/mobile/verify?flow=mobile_verification',
-      'code-gym': 'https://code-gym-api.codingblocks.com/api/jwt/otp/verif?flow=mobile_verificationy'
+      'hack': 'https://hack-api.codingblocks.com/api/v2/jwt/otp/verify',
+      'online': 'https://online-api.codingblocks.com/api/v2/jwt/otp/mobile/verify',
+      'hire': 'https://hire-api.codingblocks.com/login/otp/mobile/verify',
+      'code-gym': 'https://code-gym-api.codingblocks.com/api/jwt/otp/verify'
     },
     logout: {
       'hack': '/app/logout',
@@ -91,7 +91,7 @@
   })
 
   async function sendOtp() {
-    const response = await fetch(apiMap.sendOtpMobile[appSubdomain] || 'http://localhost:3000/api/jwt/otp', {
+    const response = await fetch(apiMap.sendOtpMobile[appSubdomain] + '?flow=mobile-verification' || 'http://localhost:3000/api/jwt/otp', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
