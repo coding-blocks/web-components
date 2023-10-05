@@ -97,25 +97,28 @@
       'hack': 'https://hack-api.codingblocks.com/api/v2/jwt/otp',
       'online': 'https://online-api.codingblocks.com/api/v2/jwt/otp/email',
       'hire': 'https://hire-api.codingblocks.com/login/otp/email',
-      'codeskiller': 'https://code-gym-api.codingblocks.com/api/jwt/otp'
+      'codeskiller': 'https://code-gym-api.codingblocks.com/api/jwt/otp',
+      'iccwc': 'https://iccwc.codingblocks.com/api/jwt/otp'
     },
     sendOtpMobile: {
       'hack': 'https://hack-api.codingblocks.com/api/v2/jwt/otp',
       'online': 'https://online-api.codingblocks.com/api/v2/jwt/otp/mobile',
       'hire': 'https://hire-api.codingblocks.com/login/otp/mobile',
-      'codeskiller': 'https://code-gym-api.codingblocks.com/api/jwt/otp'
+      'codeskiller': 'https://code-gym-api.codingblocks.com/api/jwt/otp',
+      'iccwc': 'https://iccwc.codingblocks.com/api/jwt/otp'
     },
     verifyOtpEmail: {
       'hack': 'https://hack-api.codingblocks.com/api/v2/jwt/otp/verify',
       'online': 'https://online-api.codingblocks.com/api/v2/jwt/otp/email/verify',
       'hire': 'https://hire-api.codingblocks.com/login/otp/email/verify',
-      'codeskiller': 'https://code-gym-api.codingblocks.com/api/jwt/otp/verify'
+      'codeskiller': 'https://code-gym-api.codingblocks.com/api/jwt/otp/verify',
+      'iccwc': 'https://iccwc.codingblocks.com/api/jwt/otp/verify'
     },
     verifyOtpMobile: {
       'hack': 'https://hack-api.codingblocks.com/api/v2/jwt/otp/verify',
       'online': 'https://online-api.codingblocks.com/api/v2/jwt/otp/mobile/verify',
       'hire': 'https://hire-api.codingblocks.com/login/otp/mobile/verify',
-      'codeskiller': 'https://code-gym-api.codingblocks.com/api/jwt/otp/verify'
+      'iccwc': 'https://iccwc.codingblocks.com/api/jwt/otp/verify'
     }
   }
 
@@ -126,8 +129,8 @@
   let errorMessage = null
   let loginFlow = 'email'
   let showLoginPrompt = localStorage.getItem('cb_login_prompt') === 'true' ? true : false
-  let googleLoginUrl = appSubdomain.includes('localhost') ? `http://localhost:3838/login/google/v2?redirect_uri=http://${appSubdomain}&client=localhost&client_id=1234567890` : isStaging ? `https://account.codingblocks.xyz/login/google/v2?redirect_uri=https://${appSubdomain}.codingblocks.xyz&client=${appSubdomain}-codingblocks&client_id=1` : `https://account.codingblocks.com/login/google/v2?redirect_uri=https://${appSubdomain}.codingblocks.com&client=${appSubdomain}-codingblocks&client_id=${clientIdMap[appSubdomain]}`
-  let facebookLoginUrl = appSubdomain.includes('localhost') ? `http://localhost:3838/login/facebook/v2?redirect_uri=http://${appSubdomain}&client=localhost&client_id=1234567890` : isStaging ? `https://account.codingblocks.xyz/login/facebook/v2?redirect_uri=https://${appSubdomain}.codingblocks.xyz&client=${appSubdomain}-codingblocks&client_id=1` : `https://account.codingblocks.com/login/facebook/v2?redirect_uri=https://${appSubdomain}.codingblocks.com&client=${appSubdomain}-codingblocks&client_id=${clientIdMap[appSubdomain]}`
+  let googleLoginUrl = appSubdomain.includes('localhost') ? `http://localhost:3838/login/google/v2?redirect_uri=http://${appSubdomain}&client=localhost&client_id=1234567890` : isStaging ? `https://account.codingblocks.xyz/login/google/v2?redirect_uri=https://${appSubdomain}.codingblocks.xyz&client=${appSubdomain}-codingblocks&client_id=1` : `https://account.codingblocks.com/login/google/v2?redirect_uri=https://${appSubdomain}.codingblocks.com&client=${appSubdomain === 'iccwc' ? 'cricket-quiz-iccwc23' : appSubdomain}-codingblocks&client_id=${clientIdMap[appSubdomain]}`
+  let facebookLoginUrl = appSubdomain.includes('localhost') ? `http://localhost:3838/login/facebook/v2?redirect_uri=http://${appSubdomain}&client=localhost&client_id=1234567890` : isStaging ? `https://account.codingblocks.xyz/login/facebook/v2?redirect_uri=https://${appSubdomain}.codingblocks.xyz&client=${appSubdomain}-codingblocks&client_id=1` : `https://account.codingblocks.com/login/facebook/v2?redirect_uri=https://${appSubdomain}.codingblocks.com&client=${appSubdomain === 'iccwc' ? 'cricket-quiz-iccwc23': appSubdomain}-codingblocks&client_id=${clientIdMap[appSubdomain]}`
 
   async function sendOtp() {
     errorMessage = null
@@ -155,7 +158,7 @@
   async function verifyOtp() {
     errorMessage = null
 
-    const response = await fetch( loginFlow === 'email' ? apiMap.verifyOtpEmail[appSubdomain] : apiMap.verifyOtpMobile[appSubdomain] || 'http://localhost:3000/api/jwt/otp/verify', {
+    const response = await fetch( loginFlow === 'email' ? apiMap.verifyOtpEmail[appSubdomain] : apiMap.verifyOtpMobile[appSubdomain] || 'http://localhost:3123/api/jwt/otp/verify', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
