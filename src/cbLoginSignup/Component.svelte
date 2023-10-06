@@ -28,18 +28,18 @@
   {#if loginFlow === 'email'}
     {#if otpId} 
       <input type="number" placeholder="Enter OTP" class="w-100 mb-4" bind:value={otp}/>
-      <button class="btn btn-primary w-100" disabled={!!!otp} on:click={verifyOtp}>Verify OTP</button>
+      <button type="button" class="btn btn-primary w-100" disabled={!!!otp} on:click={verifyOtp}>Verify OTP</button>
     {:else}
       <input type="email" placeholder="Enter Email" class="w-100 mb-4" bind:value={email}/>
-      <button class="btn btn-primary w-100" disabled={!!!email} on:click={sendOtp}>Send OTP</button>
+      <button type="button" class="btn btn-primary w-100" disabled={!!!email} on:click={sendOtp}>Send OTP</button>
     {/if}
   {:else}
     {#if otpId} 
       <input type="number" placeholder="Enter OTP" class="w-100 mb-4" bind:value={otp}/>
-      <button class="btn btn-primary w-100" disabled={!!!otp} on:click={verifyOtp}>Verify OTP</button>
+      <button type="button" class="btn btn-primary w-100" disabled={!!!otp} on:click={verifyOtp}>Verify OTP</button>
     {:else}
       <input type="number" placeholder="Enter 10 digit Mobile Number" class="w-100 mb-4" bind:value={mobile}/>
-      <button class="btn btn-primary w-100" disabled={!!!mobile} on:click={sendOtp}>Send OTP</button>
+      <button type="button" class="btn btn-primary w-100" disabled={!!!mobile} on:click={sendOtp}>Send OTP</button>
     {/if}
   {/if}
 
