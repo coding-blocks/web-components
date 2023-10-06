@@ -134,6 +134,7 @@
 
   async function sendOtp() {
     errorMessage = null
+    console.log('urs is', loginFlow === 'email' ? apiMap.sendOtpEmail[appSubdomain] : apiMap.sendOtpMobile[appSubdomain] || 'http://localhost:3000/api/jwt/otp')
     const response = await fetch(loginFlow === 'email' ? apiMap.sendOtpEmail[appSubdomain] : apiMap.sendOtpMobile[appSubdomain] || 'http://localhost:3000/api/jwt/otp', {
       method: 'POST',
       headers: {
