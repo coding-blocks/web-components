@@ -159,7 +159,7 @@
   async function verifyOtp() {
     errorMessage = null
 
-    const response = await fetch( loginFlow === 'email' ? apiMap.verifyOtpEmail[appSubdomain] : apiMap.verifyOtpMobile[appSubdomain] || 'http://localhost:3000/api/jwt/otp/verify', {
+    const response = await fetch((loginFlow === 'email' ? apiMap.verifyOtpEmail[appSubdomain] : apiMap.verifyOtpMobile[appSubdomain]) || 'http://localhost:3000/api/jwt/otp/verify', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
