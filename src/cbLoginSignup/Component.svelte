@@ -85,6 +85,7 @@
 
 <script>
   const appSubdomain = window.location.host.split('.')[0]
+  const pathname = window.location.pathname
   const isStaging = window.location.host.includes('codingblocks.xyz')
   const clientIdMap = {
     'hack': 2146237097,
@@ -129,8 +130,8 @@
   let errorMessage = null
   let loginFlow = 'email'
   let showLoginPrompt = localStorage.getItem('cb_login_prompt') === 'true' ? true : false
-  let googleLoginUrl = appSubdomain.includes('localhost') ? `http://localhost:3838/login/google/v2?redirect_uri=http://${appSubdomain}&client=localhost&client_id=1234567890` : isStaging ? `https://account.codingblocks.xyz/login/google/v2?redirect_uri=https://${appSubdomain}.codingblocks.xyz&client=${appSubdomain}-codingblocks&client_id=1` : `https://account.codingblocks.com/login/google/v2?redirect_uri=https://${appSubdomain}.codingblocks.com&client=${appSubdomain === 'iccwc' ? 'cricket-quiz-iccwc23' : appSubdomain}-codingblocks&client_id=${clientIdMap[appSubdomain]}`
-  let facebookLoginUrl = appSubdomain.includes('localhost') ? `http://localhost:3838/login/facebook/v2?redirect_uri=http://${appSubdomain}&client=localhost&client_id=1234567890` : isStaging ? `https://account.codingblocks.xyz/login/facebook/v2?redirect_uri=https://${appSubdomain}.codingblocks.xyz&client=${appSubdomain}-codingblocks&client_id=1` : `https://account.codingblocks.com/login/facebook/v2?redirect_uri=https://${appSubdomain}.codingblocks.com&client=${appSubdomain === 'iccwc' ? 'cricket-quiz-iccwc23': appSubdomain}-codingblocks&client_id=${clientIdMap[appSubdomain]}`
+  let googleLoginUrl = appSubdomain.includes('localhost') ? `http://localhost:3838/login/google/v2?redirect_uri=http://${appSubdomain}${pathname}&client=localhost&client_id=1234567890` : isStaging ? `https://account.codingblocks.xyz/login/google/v2?redirect_uri=https://${appSubdomain}.codingblocks.xyz${pathname}&client=${appSubdomain}-codingblocks&client_id=1` : `https://account.codingblocks.com/login/google/v2?redirect_uri=https://${appSubdomain}.codingblocks.com${pathname}&client=${appSubdomain === 'iccwc' ? 'cricket-quiz-iccwc23' : appSubdomain}-codingblocks&client_id=${clientIdMap[appSubdomain]}`
+  let facebookLoginUrl = appSubdomain.includes('localhost') ? `http://localhost:3838/login/facebook/v2?redirect_uri=http://${appSubdomain}${pathname}&client=localhost&client_id=1234567890` : isStaging ? `https://account.codingblocks.xyz/login/facebook/v2?redirect_uri=https://${appSubdomain}.codingblocks.xyz${pathname}&client=${appSubdomain}-codingblocks&client_id=1` : `https://account.codingblocks.com/login/facebook/v2?redirect_uri=https://${appSubdomain}.codingblocks.com${pathname}&client=${appSubdomain === 'iccwc' ? 'cricket-quiz-iccwc23': appSubdomain}-codingblocks&client_id=${clientIdMap[appSubdomain]}`
 
   async function sendOtp() {
     errorMessage = null
