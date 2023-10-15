@@ -1,9 +1,9 @@
 <svelte:options tag="cb-login-signup" />
 <svelte:head>
-  <link rel="stylesheet" href="https://unpkg.com/@coding-blocks/motley@2.8.6/dist/account/app.min.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Mulish:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://unpkg.com/@coding-blocks/motley@2.8.6/dist/account/app.min.css">
 </svelte:head>
 
 
