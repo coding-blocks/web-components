@@ -91,7 +91,8 @@
     'hack': 2146237097,
     'online': 5633768694,
     'hire': 4190457915,
-    'codeskiller': 9706874989
+    'codeskiller': 9706874989,
+    'cricket': 3806036015
   }
   const apiMap = {
     sendOtpEmail: {
