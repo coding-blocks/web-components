@@ -104,7 +104,7 @@
 }
 
 .carousel{
-  height: 116px;
+  max-height: 116px;
   overflow: hidden;
 }
 
