@@ -63,18 +63,21 @@
     sendOtpMobile: {
       'hack': 'https://hack-api.codingblocks.com/api/v2/jwt/otp',
       'online': 'https://online-api.codingblocks.com/api/v2/jwt/otp/mobile',
+      'subscribe': 'https://online-api.codingblocks.com/api/v2/jwt/otp/mobile',
       'hire': 'https://hire-api.codingblocks.com/login/otp/mobile',
       'code-gym': 'https://code-gym-api.codingblocks.com/api/jwt/otp'
     },
     verifyOtpMobile: {
       'hack': 'https://hack-api.codingblocks.com/api/v2/jwt/otp/verify',
       'online': 'https://online-api.codingblocks.com/api/v2/jwt/otp/mobile/verify',
+      'subscribe': 'https://online-api.codingblocks.com/api/v2/jwt/otp/mobile/verify',
       'hire': 'https://hire-api.codingblocks.com/login/otp/mobile/verify',
       'code-gym': 'https://code-gym-api.codingblocks.com/api/jwt/otp/verify'
     },
     logout: {
       'hack': '/app/logout',
       'online': '/app/logout',
+      'subscribe': '/app/logout',
       'hire': '/logout',
       'code-gym': '/logout'
     }
