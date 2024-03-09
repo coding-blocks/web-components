@@ -176,7 +176,7 @@
     })
     
     if(response.ok) {
-      window.location.reload()
+      window.location = window.location.origin + '?flow=login'
     } else {
       const { message, Details } = await response.json()
       if(message || Details) {
