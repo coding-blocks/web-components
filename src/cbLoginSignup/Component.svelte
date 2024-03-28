@@ -48,7 +48,7 @@
   {:else}
     {#if otpId} 
       <input type="number" placeholder="Enter OTP" class="w-100 mb-4" bind:value={otp}/>
-      <button type="button" class="btn btn-primary w-100 {verifyOtp ? 'dot-loader' : ''}" disabled={!!!otp} on:click={verifyOtp}>
+      <button type="button" class="btn btn-primary w-100 {verifyingOtp ? 'dot-loader' : ''}" disabled={!!!otp} on:click={verifyOtp}>
         {#if verifyingOtp} 
           Verifying OTP
         {:else}
