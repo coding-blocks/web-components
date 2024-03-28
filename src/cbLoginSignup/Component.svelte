@@ -28,18 +28,42 @@
   {#if loginFlow === 'email'}
     {#if otpId} 
       <input type="number" placeholder="Enter OTP" class="w-100 mb-4" bind:value={otp}/>
-      <button type="button" class="btn btn-primary w-100" disabled={!!!otp} on:click={verifyOtp}>Verify OTP</button>
+      <button type="button" class="btn btn-primary w-100 {verifyOtp ? 'dot-loader' : ''}" disabled={!!!otp} on:click={verifyOtp}>
+        {#if verifyOtp} 
+          Verifying OTP
+        {:else}
+          Verify OTP
+        {/if}
+      </button>
     {:else}
       <input type="email" placeholder="Enter Email" class="w-100 mb-4" bind:value={email}/>
-      <button type="button" class="btn btn-primary w-100" disabled={!!!email} on:click={sendOtp}>Send OTP</button>
+      <button type="button" class="btn btn-primary w-100 {sendingOtp ? 'dot-loader' : ''}" disabled={!!!email} on:click={sendOtp}>
+        {#if sendingOtp} 
+          Sending OTP
+        {:else}
+          Send Otp
+        {/if}
+      </button>
     {/if}
   {:else}
     {#if otpId} 
       <input type="number" placeholder="Enter OTP" class="w-100 mb-4" bind:value={otp}/>
-      <button type="button" class="btn btn-primary w-100" disabled={!!!otp} on:click={verifyOtp}>Verify OTP</button>
+      <button type="button" class="btn btn-primary w-100 {verifyOtp ? 'dot-loader' : ''}" disabled={!!!otp} on:click={verifyOtp}>
+        {#if verifyingOtp} 
+          Verifying OTP
+        {:else}
+          Verify OTP
+        {/if}
+      </button>
     {:else}
       <input type="number" placeholder="Enter 10 digit Mobile Number" class="w-100 mb-4" bind:value={mobile}/>
-      <button type="button" class="btn btn-primary w-100" disabled={!!!mobile} on:click={sendOtp}>Send OTP</button>
+      <button type="button" class="btn btn-primary w-100 {sendingOtp ? 'dot-loader' : ''}" disabled={!!!mobile} on:click={sendOtp}>
+        {#if sendingOtp} 
+          Sending OTP
+        {:else}
+          Send Otp
+        {/if}
+      </button>
     {/if}
   {/if}
 
@@ -129,6 +153,8 @@
   let otp = null
   let otpId = null;
   let errorMessage = null
+  let sendingOtp = false
+  let verifyingOtp = false
   let loginFlow = 'email'
   let showLoginPrompt = localStorage.getItem('cb_login_prompt') === 'true' ? true : false
   let googleLoginUrl = appSubdomain.includes('localhost') ? `http://localhost:3838/login/google/v2?redirect_uri=http://${appSubdomain}${pathname}&client=localhost&client_id=1234567890` : isStaging ? `https://account.codingblocks.xyz/login/google/v2?redirect_uri=https://${appSubdomain}.codingblocks.xyz${pathname}&client=${appSubdomain}-codingblocks&client_id=1` : `https://account.codingblocks.com/login/google/v2?redirect_uri=https://${appSubdomain}.codingblocks.com${pathname}&client=${appSubdomain === 'cricket' ? 'cricket-quiz-iccwc23' : appSubdomain}-codingblocks&client_id=${clientIdMap[appSubdomain]}`
@@ -136,6 +162,7 @@
 
   async function sendOtp() {
     errorMessage = null
+    sendingOtp = true
     const response = await fetch((loginFlow === 'email' ? apiMap.sendOtpEmail[appSubdomain] : apiMap.sendOtpMobile[appSubdomain]) || 'http://localhost:3000/api/jwt/otp', {
       method: 'POST',
       headers: {
@@ -148,9 +175,11 @@
       })
     })
     if(response.ok) {
+      sendingOtp = false
       let { id, Details } = await response.json()
       otpId = id || Details
     } else {
+      sendingOtp = false
       const { message, Details } = await response.json()
       if(message || Details) {
         errorMessage = message || Details
@@ -160,6 +189,7 @@
 
   async function verifyOtp() {
     errorMessage = null
+    verifyingOtp = true
 
     const response = await fetch((loginFlow === 'email' ? apiMap.verifyOtpEmail[appSubdomain] : apiMap.verifyOtpMobile[appSubdomain]) || 'http://localhost:3000/api/jwt/otp/verify', {
       method: 'POST',
@@ -176,8 +206,10 @@
     })
     
     if(response.ok) {
+      verifyingOtp = false
       window.location = window.location.origin + '?flow=login'
     } else {
+      verifyingOtp = false
       const { message, Details } = await response.json()
       if(message || Details) {
         errorMessage = message || Details
@@ -295,4 +327,17 @@
   .social-media-logo {
     width: 15px;
   }
+
+  .dot-loader::after{
+    animation: dots 3s linear infinite;
+    content: '';
+  }
+
+  @keyframes dots {
+    25% {content: '.'}
+    50% { content: '..'}
+    75% {content: '...'}
+    100% { content: ''}
+  }
+
 </style>

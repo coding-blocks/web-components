@@ -19,10 +19,22 @@
   
   {#if otpId} 
     <input type="number" placeholder="Enter OTP" class="w-100 mb-4" bind:value={otp}/>
-    <button class="btn btn-primary w-100" disabled={!!!otp} on:click={verifyOtp}>Verify OTP</button>
+    <button class="btn btn-primary w-100" disabled={!!!otp} on:click={verifyOtp}>
+      {#if verifyingOtp} 
+        Verifying OTP
+      {:else}
+        Verify OTP
+      {/if}
+    </button>
   {:else}
     <input type="number" placeholder="Enter 10 digit Mobile Number" class="w-100 mb-4" bind:value={mobile}/>
-    <button class="btn btn-primary w-100" disabled={!!!mobile} on:click={sendOtp}>Send OTP</button>
+    <button class="btn btn-primary w-100" disabled={!!!mobile} on:click={sendOtp}>
+      {#if sendingOtp} 
+        Sending OTP
+      {:else}
+        Send Otp
+      {/if}
+    </button>
   {/if}
 
   {#if showLogoutButton}
@@ -88,12 +100,15 @@
   let otpId = null;
   let errorMessage = null
   let showLogoutButton = false
+  let sendingOtp = false
+  let verifyingOtp = false
 
   onMount(() => {
     authCookie = document.cookie.split('; ').filter(_ => _.split('=')[0] === 'cb_auth')[0].split('=')[1]
   })
 
   async function sendOtp() {
+    sendingOtp = true
     const response = await fetch(apiMap.sendOtpMobile[appSubdomain] + '?flow=mobile-verification' || 'http://localhost:3000/api/jwt/otp', {
       method: 'POST',
       headers: {
@@ -105,9 +120,11 @@
       })
     })
     if(response.ok) {
+      sendingOtp = false
       let { id, Details } = await response.json()
       otpId = id || Details
     } else {
+      sendingOtp = false
       const { message, Details } = await response.json()
       if(message || Details) {
         errorMessage = message || Details
@@ -120,6 +137,7 @@
 
   async function verifyOtp() {
     errorMessage = null
+    verifyingOtp = true
 
     const response = await fetch(apiMap.verifyOtpMobile[appSubdomain] + '?flow=mobile-verification' || 'http://localhost:3000/api/jwt/otp/verify', {
       method: 'POST',
@@ -136,8 +154,10 @@
     })
     
     if(response.ok) {
+      verifyingOtp = false
       window.location.reload()
     } else {
+      verifyingOtp = false
       const { message, Details } = await response.json()
       if(message || Details) {
         errorMessage = message || Details
@@ -245,5 +265,17 @@
 
   .social-media-logo {
     width: 15px;
+  }
+  
+  .dot-loader::after{
+    animation: dots 3s linear infinite;
+    content: '';
+  }
+
+  @keyframes dots {
+    25% {content: '.'}
+    50% { content: '..'}
+    75% {content: '...'}
+    100% { content: ''}
   }
 </style>
