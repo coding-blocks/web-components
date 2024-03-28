@@ -19,7 +19,7 @@
   
   {#if otpId} 
     <input type="number" placeholder="Enter OTP" class="w-100 mb-4" bind:value={otp}/>
-    <button class="btn btn-primary w-100" disabled={!!!otp} on:click={verifyOtp}>
+    <button class="btn btn-primary w-100 {verifyingOtp ? 'dot-loader' : ''}" disabled={!!!otp} on:click={verifyOtp}>
       {#if verifyingOtp} 
         Verifying OTP
       {:else}
@@ -28,7 +28,7 @@
     </button>
   {:else}
     <input type="number" placeholder="Enter 10 digit Mobile Number" class="w-100 mb-4" bind:value={mobile}/>
-    <button class="btn btn-primary w-100" disabled={!!!mobile} on:click={sendOtp}>
+    <button class="btn btn-primary w-100 {sendingOtp ? 'dot-loader' : ''}" disabled={!!!mobile} on:click={sendOtp}>
       {#if sendingOtp} 
         Sending OTP
       {:else}
@@ -266,7 +266,7 @@
   .social-media-logo {
     width: 15px;
   }
-  
+
   .dot-loader::after{
     animation: dots 3s linear infinite;
     content: '';
